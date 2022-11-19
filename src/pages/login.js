@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
+import * as ROUTES from '../constants/routes';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -12,7 +13,19 @@ export default function Login() {
     const [error, setError] = useState('');
     const isInvalid = password === '' || emailAddress === '';
 
-    const handleLogin = () => {};
+    const handleLogin = async(event) => {
+        event.preventDefault();
+
+        try {
+            await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+            const sendSubmit = () => {
+                navigate(ROUTES.DASHBOARD)
+            }
+        } catch (error) {
+            setPassword('');
+            setError(error.message);
+        }
+    };
 
     useEffect(() => {
         document.title = 'Login - Instagram Clone'
