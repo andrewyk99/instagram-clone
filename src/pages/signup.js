@@ -46,7 +46,7 @@ export default function SignUp() {
               dateCreated: Date.now()
             });
   
-        //   Navigate.push
+        navigate(ROUTES.DASHBOARD);
         } catch (error) {
           setFullName('');
           setEmailAddress('');
@@ -60,7 +60,7 @@ export default function SignUp() {
     };
 
     useEffect(() => {
-        document.title = 'Sign Up - Instagram Clone'
+        document.title = 'Sign Up - Instagram Clone';
     }, []);
 
     return (
